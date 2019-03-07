@@ -34,33 +34,27 @@
         const password = document.querySelector('#password');
         const passwordSecure = document.querySelector('#password-secure');
         const conditions = document.querySelector('#conditions');
-
         // Capter la soumissionn du formulaire
         document.querySelector('form').addEventListener('submit', (event) => {
             // Bloquer le comportement naturel du formulaire
             event.preventDefault();
-
             // Variable 
             let formError = 0;
-
             // Vérifier les champs du formulaire
             if( email.value.length <= 4 ) formError++;
             if( pseudo.value.length <= 1 ) formError++;
             if( password.value.length <= 4 ) formError++;
             if( password.value !== passwordSecure.value  ) formError++;
             if( !conditions ) formError++;
-
             // Validation finale
             if( formError === 0 ){
                 let form = new FormData(document.querySelector('#form'));
-
                 // Ajouter un document dans la base PouchDB
                 innerDBuser.put({
                     _id: makeid(),
                     email: email.value,
                     password: password.value,
                     pseudo: pseudo.value
-
                 }, ( err, data )=> {
                     if(err){
                         console.error(err);
@@ -71,8 +65,6 @@
                 })
                 
             };
-
         });
     });
-
 </script>
